@@ -486,6 +486,236 @@ describe('unit/express:', function () {
 
           expect(res.locals.message.restMessage).toBeUndefined();
         });
+
+        describe('qewd response headers', function () {
+          it('should ignore response headers (not an object)', function () {
+            /*jshint camelcase: false */
+            resultObj.message.qewd_response_headers = 'foo';
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.locals.message.qewd_response_headers).toBe('foo');
+            /*jshint camelcase: true */
+          });
+
+          it('should set response headers', function () {
+            /*jshint camelcase: false */
+            resultObj.message.qewd_response_headers = {
+              'x-foo': 'bar'
+            };
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.set).toHaveBeenCalledWith('x-foo', 'bar');
+            expect(res.locals.message.qewd_response_headers).toBeUndefined();
+            /*jshint camelcase: true */
+          });
+        });
+
+        describe('send jwt as cookie', function () {
+          it('should set cookie with default name', function () {
+            /*jshint camelcase: false */
+            resultObj.message = {
+              qewd_send_jwt_as_cookie: true,
+              token: 'foo.bar.baz',
+              restMessage: {}
+            };
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.set).toHaveBeenCalledWith('Set-Cookie', 'JSESSIONID=foo.bar.baz; path=/');
+            expect(res.locals.message.qewd_send_jwt_as_cookie).toBeUndefined();
+            expect(res.locals.message.token).toBeUndefined();
+            /*jshint camelcase: true */
+          });
+
+          it('should set cookie with custom name', function () {
+            /*jshint camelcase: false */
+            resultObj.message = {
+              qewd_send_jwt_as_cookie: {
+                name: 'QUUX'
+              },
+              token: 'foo.bar.baz',
+              restMessage: {}
+            };
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.set).toHaveBeenCalledWith('Set-Cookie', 'QUUX=foo.bar.baz; path=/');
+            expect(res.locals.message.qewd_send_jwt_as_cookie).toBeUndefined();
+            expect(res.locals.message.token).toBeUndefined();
+            /*jshint camelcase: true */
+          });
+
+          it('should set cookie with custom directives', function () {
+            /*jshint camelcase: false */
+            resultObj.message = {
+              qewd_send_jwt_as_cookie: {
+                directives: [
+                 'path=/xxx',
+                 'HttpOnly'
+                ]
+              },
+              token: 'foo.bar.baz',
+              restMessage: {}
+            };
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.set).toHaveBeenCalledWith('Set-Cookie', 'JSESSIONID=foo.bar.baz; path=/xxx; HttpOnly');
+            expect(res.locals.message.qewd_send_jwt_as_cookie).toBeUndefined();
+            expect(res.locals.message.token).toBeUndefined();
+            /*jshint camelcase: true */
+          });
+        });
+      });
+
+      describe('restRequest', function () {
+        beforeEach(function () {
+          /*jshint camelcase: false */
+          resultObj.type = 'restRequest';
+          resultObj.ms_requestId = '1234';
+          /*jshint camelcase: true */
+        });
+
+        describe('qewd response headers', function () {
+          it('should ignore response headers (not an object)', function () {
+            /*jshint camelcase: false */
+            resultObj.message.qewd_response_headers = 'foo';
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.locals.message.qewd_response_headers).toBe('foo');
+            /*jshint camelcase: true */
+          });
+
+          it('should set response headers', function () {
+            /*jshint camelcase: false */
+            resultObj.message.qewd_response_headers = {
+              'x-foo': 'bar'
+            };
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.set).toHaveBeenCalledWith('x-foo', 'bar');
+            expect(res.locals.message.qewd_response_headers).toBeUndefined();
+            /*jshint camelcase: true */
+          });
+        });
+
+        describe('send jwt as cookie', function () {
+          it('should set cookie with default name', function () {
+            /*jshint camelcase: false */
+            resultObj.message = {
+              qewd_send_jwt_as_cookie: {},
+              token: 'foo.bar.baz'
+            };
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.set).toHaveBeenCalledWith('Set-Cookie', 'JSESSIONID=foo.bar.baz; path=/');
+            expect(res.locals.message.qewd_send_jwt_as_cookie).toBeUndefined();
+            expect(res.locals.message.token).toBeUndefined();
+            /*jshint camelcase: true */
+          });
+
+          it('should set cookie with custom name', function () {
+            /*jshint camelcase: false */
+            resultObj.message = {
+              qewd_send_jwt_as_cookie: {
+                name: 'QUUX'
+              },
+              token: 'foo.bar.baz'
+            };
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.set).toHaveBeenCalledWith('Set-Cookie', 'QUUX=foo.bar.baz; path=/');
+            expect(res.locals.message.qewd_send_jwt_as_cookie).toBeUndefined();
+            expect(res.locals.message.token).toBeUndefined();
+            /*jshint camelcase: true */
+          });
+
+          it('should set cookie with custom directives', function () {
+            /*jshint camelcase: false */
+            resultObj.message = {
+              qewd_send_jwt_as_cookie: {
+                directives: [
+                 'path=/xxx',
+                 'HttpOnly'
+                ]
+              },
+              token: 'foo.bar.baz'
+            };
+            /*jshint camelcase: true */
+
+            qx.handleMessage(req, res, next);
+            jasmine.clock().tick(timeout);
+
+            var handleResponse = q.handleMessage.calls.argsFor(0)[1];
+            handleResponse(resultObj);
+
+            /*jshint camelcase: false */
+            expect(res.set).toHaveBeenCalledWith('Set-Cookie', 'JSESSIONID=foo.bar.baz; path=/xxx; HttpOnly');
+            expect(res.locals.message.qewd_send_jwt_as_cookie).toBeUndefined();
+            expect(res.locals.message.token).toBeUndefined();
+            /*jshint camelcase: true */
+          });
+        });
       });
 
       describe('ewd_application', function () {
