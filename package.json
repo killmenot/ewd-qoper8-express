@@ -40,22 +40,22 @@
     ]
   },
   "dependencies": {
-    "debug": "^3.1.0",
-    "express": "^4.16.2",
-    "qewd-microservice-router": "^1.0.0"
+    "debug": "^4.1.1",
+    "express": "^4.16.3",
+    "qewd-microservice-router": "^1.2.11"
   },
   "devDependencies": {
-    "body-parser": "^1.18.2",
-    "coveralls": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "coveralls": "^3.0.2",
     "ewd-qoper8": "^3.16.1",
-    "jasmine": "^2.9.0",
+    "jasmine": "^3.3.1",
     "jasmine-spec-reporter": "^4.1.1",
-    "jasmine-spy-matchers": "^1.2.0",
-    "jshint": "^2.9.5",
+    "jasmine-spy-matchers": "^2.2.0",
+    "jshint": "^2.9.7",
     "mockery": "^2.1.0",
     "nyc": "^11.4.1",
     "pre-commit": "^1.2.2",
-    "rewire": "^2.5.2",
-    "supertest": "^3.0.0"
+    "rewire": "^4.0.1",
+    "supertest": "^3.4.1"
   }
 }
