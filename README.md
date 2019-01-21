@@ -1,6 +1,6 @@
 # ewd-qoper8-express: Express integration module for ewd-qoper8
 
-[![Build Status](https://travis-ci.org/robtweed/ewd-qoper8-express.svg?branch=master)](https://travis-ci.org/robtweed/ewd-qoper8-express) [![Coverage Status](https://coveralls.io/repos/github/robtweed/ewd-qoper8-express/badge.svg?branch=master)](https://coveralls.io/github/robtweed/ewd-qoper8-express?branch=master) [![Dependency Status](https://gemnasium.com/badges/github.com/robtweed/ewd-qoper8-express.svg)](https://gemnasium.com/github.com/robtweed/ewd-qoper8-express)
+[![Build Status](https://travis-ci.org/robtweed/ewd-qoper8-express.svg?branch=master)](https://travis-ci.org/robtweed/ewd-qoper8-express) [![Coverage Status](https://coveralls.io/repos/github/robtweed/ewd-qoper8-express/badge.svg?branch=master)](https://coveralls.io/github/robtweed/ewd-qoper8-express?branch=master) [![Dependency Status](https://david-dm.org/robtweed/ewd-qoper8-express.svg)](https://david-dm.org/robtweed/ewd-qoper8-express) [![npm version](https://img.shields.io/npm/v/ewd-qoper8-express.svg)](https://www.npmjs.com/package/ewd-qoper8-express)
 
 Rob Tweed <rtweed@mgateway.com>  
 24 February 2016-17, M/Gateway Developments Ltd [http://www.mgateway.com](http://www.mgateway.com).
@@ -95,7 +95,7 @@ DEBUG=ewd-qoper8-express server.js
 ## License
 
 ```
- Copyright (c) 2016 M/Gateway Developments Ltd,                           
+ Copyright (c) 2016-2019 M/Gateway Developments Ltd,                           
  Reigate, Surrey UK.                                                      
  All rights reserved.                                                     
                                                                            
